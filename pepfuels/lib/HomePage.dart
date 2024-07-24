@@ -34,27 +34,43 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'login');
-                    },
-                    icon: Icon(Icons.login),
-                    label: Text('Go to Login Page'),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                          double.infinity, 50), // Make button take full width
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'login');
+                      },
+                      icon: Icon(Icons.login),
+                      // label: Text('Go to Login Page'),
+                      label: Padding(
+                        padding: const EdgeInsets.all(
+                            20.0), // Adjust padding as needed
+                        child: Text('Go to Login Page'),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                            double.infinity, 50), // Make button take full width
+                      ),
                     ),
                   ),
                   SizedBox(height: 10), // Add spacing between buttons
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'register');
-                    },
-                    icon: Icon(Icons.app_registration),
-                    label: Text('Go to Register Page'),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                          double.infinity, 50), // Make button take full width
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'register');
+                      },
+                      icon: Icon(Icons.app_registration),
+                      // label: Text('Go to Register Page'),
+                      label: Padding(
+                        padding: const EdgeInsets.all(
+                            20.0), // Adjust padding as needed
+                        child: Text('Go to Register Page'),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                            double.infinity, 50), // Make button take full width
+                      ),
                     ),
                   ),
                 ],

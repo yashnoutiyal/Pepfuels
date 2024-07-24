@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class BulkOrder extends StatefulWidget {
   @override
-  _JerryCanState createState() => _JerryCanState();
+  _BulkOrderState createState() => _BulkOrderState();
 }
 
-class _JerryCanState extends State<BulkOrder> {
-  int _selectedLiters = 0;
+class _BulkOrderState extends State<BulkOrder> {
+  int _selectedLiters = 0;  // Initialize to 0
   int _totalAmount = 0;
 
   void _calculateAmount(int liters) {
@@ -14,6 +14,14 @@ class _JerryCanState extends State<BulkOrder> {
       _selectedLiters = liters;
       _totalAmount = liters * 100; // 100rs per liter
     });
+  }
+
+  List<int> _generateLitersList() {
+    List<int> litersList = [0]; // Add 0 as the default option
+    for (int i = 100; i <= 6000; i += 100) {
+      litersList.add(i);
+    }
+    return litersList;
   }
 
   @override
@@ -29,7 +37,8 @@ class _JerryCanState extends State<BulkOrder> {
           ),
         ),
         backgroundColor: const Color.fromARGB(255, 187, 187, 187),
-        automaticallyImplyLeading: false, // To center title without a leading widget
+        automaticallyImplyLeading:
+            false, // To center title without a leading widget
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -48,50 +57,61 @@ class _JerryCanState extends State<BulkOrder> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
-                  Text(
-                    'Select Quantity (in liters):',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'Select Quantity (in liters):',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ),
                   SizedBox(height: 10),
-                  Wrap(
-                    spacing: 20,
-                    children: <Widget>[
-                      ElevatedButton.icon(
-                        onPressed: () => _calculateAmount(5),
-                        icon: Icon(Icons.local_gas_station),
-                        label: Text('5 Liters'),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () => _calculateAmount(10),
-                        icon: Icon(Icons.local_gas_station),
-                        label: Text('10 Liters'),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () => _calculateAmount(15),
-                        icon: Icon(Icons.local_gas_station),
-                        label: Text('15 Liters'),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () => _calculateAmount(20),
-                        icon: Icon(Icons.local_gas_station),
-                        label: Text('20 Liters'),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: DropdownButton<int>(
+                      value: _selectedLiters,
+                      onChanged: (int? newValue) {
+                        if (newValue != null) {
+                          _calculateAmount(newValue);
+                        }
+                      },
+                      items: _generateLitersList()
+                          .map<DropdownMenuItem<int>>((int value) {
+                        return DropdownMenuItem<int>(
+                          value: value,
+                          child: Text('$value Liters'),
+                        );
+                      }).toList(),
+                    ),
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    'Total Amount: $_totalAmount Rs',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      'Total Amount: $_totalAmount Rs',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ),
                   SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _totalAmount > 0 ? () {
-                      // Add your payment gateway integration here
-                      Navigator.pushNamed(context, 'payment');
-                    } : null,
-                    child: Text('Proceed to Payment'),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 50), // Make button take full width
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton(
+                      onPressed: _totalAmount > 0
+                          ? () {
+                              // Add your payment gateway integration here
+                              Navigator.pushNamed(context, 'payment');
+                            }
+                          : null,
+                      child: Padding(
+                        padding: const EdgeInsets.all(
+                            20.0), // Adjust padding as needed
+                        child: Text('Proceed to Payment'),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(
+                            double.infinity, 50), // Make button take full width
+                      ),
                     ),
                   ),
                 ],

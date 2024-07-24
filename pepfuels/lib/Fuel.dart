@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Doorstep extends StatelessWidget {
+class Fuel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,21 +31,21 @@ class Doorstep extends StatelessWidget {
               margin: const EdgeInsets.only(top: 10.0),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(26.0),
               child: Column(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'jerrycan');
+                        Navigator.pushNamed(context, 'doorstep');
                       },
                       icon: Icon(Icons.local_gas_station),
-                      // label: Text('Jerry Can'),
+                      // label: Text('Fuel at doorstep'),
                       label: Padding(
                         padding: const EdgeInsets.all(
                             20.0), // Adjust padding as needed
-                        child: Text('Jerry Can'),
+                        child: Text('Fuel at Doorstep'),
                       ),
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(
@@ -53,19 +53,20 @@ class Doorstep extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   SizedBox(height: 10), // Add spacing between buttons
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: ElevatedButton.icon(
+                    child:  ElevatedButton.icon(
                       onPressed: () {
                         Navigator.pushNamed(context, 'bulkorder');
                       },
-                      icon: Icon(Icons.shopping_cart),
-                      // label: Text('Bulk Order'),
+                      icon: Icon(Icons.local_gas_station),
+                      // label: Text('Fuel at Ro'),
                       label: Padding(
                         padding: const EdgeInsets.all(
                             20.0), // Adjust padding as needed
-                        child: Text('Bulk Order'),
+                        child: Text('Fuel at Ro'),
                       ),
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(
@@ -86,7 +87,7 @@ class Doorstep extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
-    home: Doorstep(),
+    home: Fuel(),
     routes: {
       'jerrycan': (context) => JerryCanPage(), // Define your JerryCanPage here
       'bulkorder': (context) =>
